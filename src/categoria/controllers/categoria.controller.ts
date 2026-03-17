@@ -6,31 +6,36 @@ import { Categoria } from '../entities/categoria.entity';
 export class CategoriaController {
 
   constructor(
-    private readonly service: CategoriaService
+    private readonly categoriaService: CategoriaService // nome consistente
   ) {}
 
   @Post()
   create(@Body() categoria: Categoria) {
-    return this.service.create(categoria);
+    return this.categoriaService.create(categoria);
   }
 
   @Get()
   findAll() {
-    return this.service.findAll();
+    return this.categoriaService.findAll();
   }
 
   @Get('/:id')
   findById(@Param('id') id: number) {
-    return this.service.findById(id);
+    return this.categoriaService.findById(id);
+  }
+
+  @Get('/nome/:nome')
+  findByNome(@Param('nome') nome: string) {
+    return this.categoriaService.findByNome(nome); // agora vai funcionar
   }
 
   @Put()
   update(@Body() categoria: Categoria) {
-    return this.service.update(categoria);
+    return this.categoriaService.update(categoria);
   }
 
   @Delete('/:id')
   delete(@Param('id') id: number) {
-    return this.service.delete(id);
+    return this.categoriaService.delete(id);
   }
 }

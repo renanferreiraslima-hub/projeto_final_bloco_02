@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 import { Categoria } from '../entities/categoria.entity';
 
@@ -31,4 +31,9 @@ export class CategoriaService {
   async delete(id: number) {
     return this.categoriaRepository.delete(id);
   }
+  async findByNome(nome: string): Promise<Categoria[]> {
+  return this.categoriaRepository.find({
+    where: { nome: Like(`%${nome}%`) },
+  });
+}
 }
